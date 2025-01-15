@@ -1,10 +1,11 @@
 # Use Alpine Linux as the base image
 FROM alpine:latest
 
-# Install dependencies (git and bash)
+# Install dependencies (git, bash, and curl)
 RUN apk update && apk add --no-cache \
   git \
-  bash
+  bash \
+  curl
 
 # Set the working directory
 WORKDIR /action
