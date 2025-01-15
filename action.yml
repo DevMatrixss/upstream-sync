@@ -1,6 +1,6 @@
 name: Sync Upstream Repository
 description: Synchronize changes from an upstream repository to a downstream branch.
-author: Your Name <your.email@example.com>
+author: DevMatrixss
 
 inputs:
   upstream_repo:
@@ -12,7 +12,7 @@ inputs:
   downstream_branch:
     description: Branch of the downstream repository to sync to.
     required: true
-  custom_token:
+  github_token:
     description: Personal access token or custom token for authentication.
     required: true
   fetch_args:
@@ -39,7 +39,7 @@ runs:
     - "${{ inputs.upstream_repo }}"
     - "${{ inputs.upstream_branch }}"
     - "${{ inputs.downstream_branch }}"
-    - "${{ inputs.custom_token }}"
+    - "${{ inputs.github_token }}"
     - "${{ inputs.fetch_args }}"
     - "${{ inputs.merge_args }}"
     - "${{ inputs.push_args }}"
