@@ -23,6 +23,15 @@ echo "Using UPSTREAM_REPO: $UPSTREAM_REPO"
 echo "Using UPSTREAM_BRANCH: $UPSTREAM_BRANCH"
 echo "Using DOWNSTREAM_BRANCH: $DOWNSTREAM_BRANCH"
 
+# Validate token by calling GitHub API
+echo "Validating token..."
+VALID_TOKEN=$(curl -s -o /dev/null -w "%{http_code}" -H "Authorization: token ${CUSTOM_TOKEN}" https://api.github.com/user)
+
+if [[ "$VALID_TOKEN" != "200" ]]; then
+  echo "Invalid token. Exiting."
+  exit 1
+fi
+
 # Clone the downstream repository
 echo "Cloning downstream repository..."
 git clone "https://x-access-token:${CUSTOM_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" work || {
