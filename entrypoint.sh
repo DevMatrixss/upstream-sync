@@ -16,6 +16,16 @@ MERGE_ARGS="${MERGE_ARGS:-}"
 PUSH_ARGS="${PUSH_ARGS:-}"
 SPAWN_LOGS="${SPAWN_LOGS:-false}"
 
+# Token validation: check if the token is valid by hitting GitHub API
+token_validation_response=$(curl -s -o /dev/null -w "%{http_code}" -H "Authorization: token ${CUSTOM_TOKEN}" https://api.github.com/user)
+
+if [[ "$token_validation_response" -ne 200 ]]; then
+  echo "Invalid token. Response code: $token_validation_response"
+  exit 1
+else
+  echo "Token is valid."
+fi
+
 # If UPSTREAM_REPO is not a full URL, add GitHub default
 if [[ ! "$UPSTREAM_REPO" =~ \.git$ ]]; then
   UPSTREAM_REPO="https://github.com/${UPSTREAM_REPO}.git"
