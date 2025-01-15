@@ -1,14 +1,13 @@
 #!/usr/bin/env bash
 
-set -x
-
+# रंग कोड्स को केवल टर्मिनल में लागू करने के लिए
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
-BLUE='\033[0;34m'
 CYAN='\033[0;36m'
 RESET='\033[0m'
 
+# इनपुट वैलिडेशन
 : "${1:?Missing UPSTREAM_REPO}"
 : "${2:?Missing UPSTREAM_BRANCH}"
 : "${3:?Missing DOWNSTREAM_BRANCH}"
