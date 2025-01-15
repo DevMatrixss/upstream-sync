@@ -3,25 +3,25 @@ name: Sync Upstream to Downstream
 on:
   push:
     branches:
-      - main
-  workflow_dispatch:
+      - main  # Replace with the branch you want this action to run on
+  workflow_dispatch:  # Allows manual triggering from the GitHub Actions UI
 
 jobs:
   sync:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest  # Use the latest Ubuntu runner
 
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
 
     - name: Run Sync Upstream Action
-      uses: ./  # Path to your action
+      uses: ./  # Use the current directory for the action
       with:
         upstream_repo: "j-hc/revanced-magisk-module"  # Replace with actual upstream repo
         upstream_branch: "main"              # Replace with actual branch
         downstream_branch: "main"            # Replace with actual branch
-        custom_token: "${{ secrets.CUSTOM_TOKEN }}"
-        fetch_args: "--all"
-        merge_args: "--no-ff"
-        push_args: "--force"
-        spawn_logs: "true"
+        custom_token: "${{ secrets.CUSTOM_TOKEN }}"  # Secret token for authentication
+        fetch_args: "--all"                  # Optional fetch arguments
+        merge_args: "--no-ff"                # Optional merge arguments
+        push_args: "--force"                 # Optional push arguments
+        spawn_logs: "true"                   # Optional logs
