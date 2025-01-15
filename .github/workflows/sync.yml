@@ -17,7 +17,7 @@ jobs:
     - name: Run Sync Upstream Action
       uses: ./  # Path to your action
       with:
-        upstream_repo: "owner/upstream-repo"  # Replace with actual upstream repo
+        upstream_repo: "j-hc/revanced-magisk-module"  # Replace with actual upstream repo
         upstream_branch: "main"              # Replace with actual branch
         downstream_branch: "main"            # Replace with actual branch
         custom_token: "${{ secrets.CUSTOM_TOKEN }}"
