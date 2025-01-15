@@ -25,9 +25,15 @@ MERGE_ARGS="${6:-}"
 PUSH_ARGS="${7:-}"
 SPAWN_LOGS="${8:-false}"
 
+# set +x यहाँ लगा दिया गया है
+set +x
+
 echo -e "${CYAN}Using UPSTREAM_REPO: $UPSTREAM_REPO${RESET}"
 echo -e "${CYAN}Using UPSTREAM_BRANCH: $UPSTREAM_BRANCH${RESET}"
 echo -e "${CYAN}Using DOWNSTREAM_BRANCH: $DOWNSTREAM_BRANCH${RESET}"
+
+# डिबगिंग फिर से सक्रिय करें (यदि आवश्यक हो)
+set -x
 
 echo -e "${YELLOW}Cloning downstream repository...${RESET}"
 git clone "https://x-access-token:${CUSTOM_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" work || {
