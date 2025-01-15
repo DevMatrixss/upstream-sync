@@ -1,0 +1,47 @@
+name: Sync Upstream Repository
+description: Synchronize changes from an upstream repository to a downstream branch.
+author: Your Name <your.email@example.com>
+
+inputs:
+  upstream_repo:
+    description: URL or GitHub repository path of the upstream repository.
+    required: true
+  upstream_branch:
+    description: Branch of the upstream repository to sync from.
+    required: true
+  downstream_branch:
+    description: Branch of the downstream repository to sync to.
+    required: true
+  custom_token:
+    description: Personal access token or custom token for authentication.
+    required: true
+  fetch_args:
+    description: Additional arguments for the 'git fetch' command.
+    required: false
+    default: ""
+  merge_args:
+    description: Additional arguments for the 'git merge' command.
+    required: false
+    default: ""
+  push_args:
+    description: Additional arguments for the 'git push' command.
+    required: false
+    default: ""
+  spawn_logs:
+    description: Whether to spawn logs during the process (true/false).
+    required: false
+    default: "false"
+
+runs:
+  using: "docker"
+  image: "Dockerfile"
+
+  args:
+    - "${{ inputs.upstream_repo }}"
+    - "${{ inputs.upstream_branch }}"
+    - "${{ inputs.downstream_branch }}"
+    - "${{ inputs.custom_token }}"
+    - "${{ inputs.fetch_args }}"
+    - "${{ inputs.merge_args }}"
+    - "${{ inputs.push_args }}"
+    - "${{ inputs.spawn_logs }}"
