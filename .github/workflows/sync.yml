@@ -1,0 +1,27 @@
+name: Sync Upstream to Downstream
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Run Sync Upstream Action
+      uses: ./  # Path to your action
+      with:
+        upstream_repo: "owner/upstream-repo"  # Replace with actual upstream repo
+        upstream_branch: "main"              # Replace with actual branch
+        downstream_branch: "main"            # Replace with actual branch
+        custom_token: "${{ secrets.CUSTOM_TOKEN }}"
+        fetch_args: "--all"
+        merge_args: "--no-ff"
+        push_args: "--force"
+        spawn_logs: "true"
