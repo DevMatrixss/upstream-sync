@@ -1,20 +1,18 @@
-# Use Alpine Linux as the base image
 FROM alpine:latest
 
-# Install dependencies (git, bash, and curl)
-RUN apk update && apk add --no-cache \
-  git \
-  bash \
-  curl
+RUN apk add --no-cache \
+    git \
+    curl \
+    bash
 
-# Set the working directory
-WORKDIR /action
+RUN adduser -D -u 1001 builder
 
-# Copy the entrypoint.sh script into the container
-COPY entrypoint.sh /action/entrypoint.sh
+COPY ./*.sh /home/builder/
 
-# Make the entrypoint.sh script executable
-RUN chmod +x /action/entrypoint.sh
+RUN chmod +x /home/builder/*.sh
 
-# Set the entrypoint to use the script
-ENTRYPOINT ["/action/entrypoint.sh"]
+WORKDIR /home/builder
+
+USER builder
+
+ENTRYPOINT ["/home/builder/entrypoint.sh"]
