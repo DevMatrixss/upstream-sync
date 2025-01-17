@@ -1,27 +1,37 @@
 name: Sync Upstream to Downstream
 
+env:
+  GITHUB_TOKEN: ${{ secrets.CUSTOM_TOKEN }}
+  UPSTREAM_REPO: "j-hc/revanced-magisk-module"
+  UPSTREAM_BRANCH: "main"
+  DOWNSTREAM_BRANCH: "main"
+  FETCH_ARGS: "--all"
+  MERGE_ARGS: "--no-ff"
+  PUSH_ARGS: "--force"
+  SPAWN_LOGS: "true"
+
 on:
   push:
     branches:
-      - main  # Replace with the branch you want this action to run on
-  workflow_dispatch:  # Allows manual triggering from the GitHub Actions UI
+      - main
+  workflow_dispatch:
 
 jobs:
   sync:
-    runs-on: ubuntu-latest  # Use the latest Ubuntu runner
+    runs-on: ubuntu-latest
 
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
 
     - name: Run Sync Upstream Action
-      uses: ./  # Use the current directory for the action
+      uses: ./  
       with:
-        upstream_repo: "j-hc/revanced-magisk-module"  # Replace with actual upstream repo
-        upstream_branch: "main"              # Replace with actual branch
-        downstream_branch: "main"            # Replace with actual branch
-        github_token: "${{ secrets.CUSTOM_TOKEN }}"  # Secret token for authentication
-        fetch_args: "--all"                  # Optional fetch arguments
-        merge_args: "--no-ff"                # Optional merge arguments
-        push_args: "--force"                 # Optional push arguments
-        spawn_logs: "true"                   # Optional logs
+        upstream_repo: ${{ env.UPSTREAM_REPO }}
+        upstream_branch: ${{ env.UPSTREAM_BRANCH }}
+        downstream_branch: ${{ env.DOWNSTREAM_BRANCH }}
+        github_token: ${{ env.GITHUB_TOKEN }}
+        fetch_args: ${{ env.FETCH_ARGS }}
+        merge_args: ${{ env.MERGE_ARGS }}
+        push_args: ${{ env.PUSH_ARGS }}
+        spawn_logs: ${{ env.SPAWN_LOGS }}
