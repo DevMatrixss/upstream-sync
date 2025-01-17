@@ -20,7 +20,7 @@ jobs:
         upstream_repo: "j-hc/revanced-magisk-module"  # Replace with actual upstream repo
         upstream_branch: "main"              # Replace with actual branch
         downstream_branch: "main"            # Replace with actual branch
-        custom_token: "${{ secrets.CUSTOM_TOKEN }}"  # Secret token for authentication
+        github_token: "${{ secrets.CUSTOM_TOKEN }}"  # Secret token for authentication
         fetch_args: "--all"                  # Optional fetch arguments
         merge_args: "--no-ff"                # Optional merge arguments
         push_args: "--force"                 # Optional push arguments
